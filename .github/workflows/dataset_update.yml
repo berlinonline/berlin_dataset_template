@@ -1,0 +1,18 @@
+name: Datenregister Dataset Update
+on:
+  push:
+    branches:
+      # name of the main branch, could `master` or something more specific
+      - master
+jobs:
+  dataset_update:
+    runs-on: ubuntu-latest
+    name: Dataset Update
+    steps:
+      # check out this repo
+      - uses: actions/checkout@v2
+      - name: Install Requirements
+        run: |
+          pip install -r requirements.txt
+
+# ${{secrets.DATENREGISTER_TOKEN}}
