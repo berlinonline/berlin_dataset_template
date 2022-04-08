@@ -16,3 +16,5 @@ jobs:
       - name: Create Readme
         run: |
           mv README.template.md README.md
+      - name: Git Commit/Push Changes
+        uses: actions-x/commit@v1
