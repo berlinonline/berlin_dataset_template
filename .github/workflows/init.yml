@@ -1,0 +1,16 @@
+# This workflow is used to initialize a new repository when it is created
+# from this template rempository.
+# If is trigger when a new branch is created, but the job is only executed 
+# when that branch is 'refs/head/master'.
+# Idea from https://lgulliver.github.io/dynamically-generate-projects-with-github-templates-and-actions/
+name: Init Dateset Project
+on: create
+jobs:
+  build:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Readme
+        run: |
+          mv README.template.md README.md
