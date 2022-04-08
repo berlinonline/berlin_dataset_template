@@ -1,9 +1,12 @@
+# This workflow updates some specific metadata fields for a dataset in CKAN.
 name: Datenregister Dataset Update
 on:
   push:
     branches:
       # name of the main branch, could `master` or something more specific
-      - master
+      - workflowtest
+env:
+  CKAN_TOKEN: ${{secrets.CKAN_TOKEN}}
 jobs:
   dataset_update:
     runs-on: ubuntu-latest
@@ -14,5 +17,6 @@ jobs:
       - name: Install Requirements
         run: |
           pip install -r requirements.txt
-
-# ${{secrets.DATENREGISTER_TOKEN}}
+      - name: Run Updater
+        run: |
+          python bin/custom_updater.py
