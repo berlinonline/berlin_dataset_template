@@ -20,22 +20,22 @@ The template provides a number of elements that are common to all datasets, as w
 
 To create a new dataset repository from this template, follow the these steps:
 
-- Click the green **Use this template** button right below the main navigation.
+- Click the green  <a href="../../generate">**Use this template**</a> button right below the main navigation.
 - Enter the repository name and description. Make sure the repository is **public** and the  **Include all branches** check box is not ticked!
-- Once the new repository is created, create a new repository secret called `CKAN_TOKEN` in [Settings > Secrets > Actions](/settings/secrets/actions).
+- Once the new repository is created, create a new repository secret called `CKAN_TOKEN` in <a href="../../settings/secrets/actions">Settings > Secrets > Actions</a>.
 This token is needed to communicate and write to the Datenregister (CKAN).
 The token can either be found on your user profile page, or it can be generated there.
 The token needs to belong to a user that has write access to the CKAN organization that the dataset belongs to.
 Ideally the user that is responsible for the dataset.
 _Important: don't enter an admin-level token here, as this would introduce serious security risks!_
-- To initialise the repository, you can [edit the configuration file](edit/master/conf/ckan_updater.json) in `conf/ckan_updater.json`.
+- To initialise the repository, you can <a href="../../edit/master/conf/ckan_updater.json">edit the configuration file</a> in `conf/ckan_updater.json`.
 The first time this file is edited, the workflow defined in [init.yml](.github/workflows/init.yml) will be triggered.
 The workflow will …
   - … rename the current README.md to `admin.md`.
   - … create a new README.md based on the template in [README.template.md](README.template.md).
   - … delete the init workflow (so that it doesn't get triggered each time the config file is changed).
 - Finally, add collaborators to the new repository who will be adding the datafiles.
-Collaborators can be added in [Settings > Access](settings/access).
+Collaborators can be added in <a href="../../settings/access">Settings > Access</a>.
 Collaborators should have the **Write** role.
 
 
