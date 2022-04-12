@@ -9,11 +9,22 @@ on:
     paths:
       - 'conf/ckan_updater.json'
 jobs:
-  create_initial_files:
-    # if: github.ref == 'refs/heads/master'
-    name: Create Initial Files
+  initialize_repository:
+    name: Initialize Dataset Repository
     runs-on: ubuntu-latest
     steps:
+      - name: Do not run scaffolding on template repository
+        shell: bash
+        # This workflow runs when the `conf/ckan_updater.json` file is modified.
+        # This is the trick to re-init a repository, but we don't want to
+        # run this action if this file is modified in the origin template repository.
+        #
+        # Using the GitHub rest API allows us to identify if the current repository
+        # is a template repository or not.
+        # see https://github.com/stefanbuck/cookiecutter-template/blob/main/.github/workflows/setup-repository.yml
+        run: |
+          curl https://api.github.com/repos/$GITHUB_REPOSITORY \
+            | jq --exit-status '.is_template == false'
       - uses: actions/checkout@v2
       - name: Create Readme
         run: |
