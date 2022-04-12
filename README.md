@@ -1,20 +1,45 @@
-# GitX als Datenspeicher
+# Berlin Dataset Template
 
-## Mindestanforderungen
-
-Alles, was man wirklich braucht:
-
-    * ein Repository für den Datensatz
-    * Datenveröffentlichende brauchen Github-Account und Zugang zu Repo
+![Berlin-Open-Data-Logo vor stilisierter Landkarte von Berlin](images/twitter_card_fallback_small.jpg)
 
 
-## Optional, aber wünschenswert
+This repository can be used as a template for new datasets for [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin"), the official Open Data portal of the city of Berlin.
+While the data portal is exclusively a metadata portal, repositories created on the basis of this template are meant to hold the actual data of a dataset.
 
-* Datensatz-Repos werden aus Templates generiert, die bereits viel nützliches mitbringen (Grundstruktur und übergreifend nützliche Files):
-    * `/data` – da kommen die Daten hin
-    * `README.md` – Dokumentation, sollte schon vorausgefüllt sein
-    * `/config` – Metadaten des Datensatzes u.a.
-    * `/.github` – Actions, z.B. Anpassung der Metadaten im Datenregister nach Push zu (Haupt-)Branch, Validierung der Daten, Transformierung der Daten (Linked Data) etc.
-    * `Makefile` – um irgendwelche Sachen lokal zu automatisieren, z.B. README aus config generieren, Datensatz im DR anlegen, Metadatan im DR updaten etc.
-* Damit Actions sowohl lokal als auch in der Cloud ausgeführt werden können, werden sie im Makefile definiert (für lokale Ausführung) und dann vom Github-Workflow aus aufgerufen.
-* CKAN/Datenregister API-Token als Github-Secret (`DATENREGISTER_TOKEN`) für jedes Repo.
+The template provides a number of elements that are common to all datasets, as well as some code for the automation of common tasks:
+
+- a `README.md` file with basic information about the dataset
+- a [data](data) folder as the default location for the actual data files
+- metadata for the dataset in the [conf](conf) folder
+- a [Makefile](Makefile) to help automate certain administration tasks
+- [workflows](.github) that will trigger these tasks under certain conditions:
+  - initialising the new dataset repository when the metadata in [conf/updater.json](conf/updater.json) is first changed
+  - updating the dataset's metadata in [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin") each time the [data](data) is changed
+
+## Using the Template
+
+To create a new dataset repository from this template, follow the these steps:
+
+- Click the green **Use this template** button right below the main navigation.
+- Enter the repository name and description. Make sure the repository is **public** and the  **Include all branches** check box is not ticked!
+- Once the new repository is created, create a new repository secret called `CKAN_TOKEN` in [Settings > Secrets > Actions](/settings/secrets/actions).
+This token is needed to communicate and write to the Datenregister (CKAN).
+The token can either be found on your user profile page, or it can be generated there.
+The token needs to belong to a user that has write access to the CKAN organization that the dataset belongs to.
+Ideally the user that is responsible for the dataset.
+_Important: don't enter an admin-level token here, as this would introduce serious security risks!_
+- To initialise the repository, you can [edit the configuration file](edit/master/conf/ckan_updater.json) in `conf/ckan_updater.json`.
+The first time this file is edited, the workflow defined in [init.yml](.github/workflows/init.yml) will be triggered.
+The workflow will …
+  - … rename the current README.md to `admin.md`.
+  - … create a new README.md based on the template in [README.template.md](README.template.md).
+  - … delete the init workflow (so that it doesn't get triggered each time the config file is changed).
+- Finally, add collaborators to the new repository who will be adding the datafiles.
+Collaborators can be added in [Settings > Access](settings/access).
+Collaborators should have the **Write** role.
+
+
+## License
+
+All software in this repository is published under the [MIT License](LICENSE).
+
