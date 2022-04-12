@@ -26,6 +26,9 @@ jobs:
           curl https://api.github.com/repos/$GITHUB_REPOSITORY \
             | jq --exit-status '.is_template == false'
       - uses: actions/checkout@v2
+      - name: Install Requirements
+        run: |
+          pip install -r requirements.txt
       - name: Create Readme
         run: |
           make README.md
