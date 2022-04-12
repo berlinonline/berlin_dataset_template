@@ -1,3 +1,15 @@
-# NAME DES DATENSDATZES
+# {{ dataset.get('title', "{TITEL_DES_DATENSATZES}") }}
 
-Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark.
+{{ dataset.get('author', "{VERÖFFENTLICHENDE_STELLE}")}}
+
+{{ dataset.get('notes', "{Hier sollte eine Beschreibung des Datensatzes stehen}") }}
+
+---
+
+Dieser Datensatz ist Teil von [Berlin Open Data](https://daten.berlin.de), dem zentralen Portal für offene Daten des Landes Berlin.
+Der Datensatz ist dort unter https://daten.berlin.de/datensaetze/{{ dataset.name_or_id }} eingetragen.
+
+## Lizenz
+
+Die [Daten](data) in diesem Repository sind unter [{{ dataset.get('license_title', "{LIZENZNAME}")}}]({{ dataset.get('license_url', "") }}) veröffentlicht.
+
