@@ -5,7 +5,9 @@
 # Idea from https://lgulliver.github.io/dynamically-generate-projects-with-github-templates-and-actions/
 name: Init Dataset Project
 on:
-  create
+  push:
+    paths:
+      - 'conf/ckan_updater.json'
 jobs:
   create_initial_files:
     # if: github.ref == 'refs/heads/master'
