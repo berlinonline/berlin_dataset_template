@@ -2,9 +2,8 @@
 name: Datenregister Dataset Update
 on:
   push:
-    branches:
-      # name of the main branch, could `master` or something more specific
-      - workflowtest
+    paths:
+      - 'data/**'
 env:
   CKAN_TOKEN: ${{secrets.CKAN_TOKEN}}
 jobs:
