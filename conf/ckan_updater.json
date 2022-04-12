@@ -1,0 +1,11 @@
+{
+    "dataset": {
+        "name_or_id": "name_oder_id_des_datensatzes",
+        "title": "Titel des Datensatzes",
+        "author": "Name der Veröffentlichenden Stelle",
+        "license_id": "cc-by"
+    },
+    "connection": {
+        "ckan_base": "https://datenregister.berlin.de"
+    }
+}
