@@ -27,10 +27,16 @@ jobs:
             | jq --exit-status '.is_template == false'
       - uses: actions/checkout@v2
       - name: Install Requirements
+        shell: bash
         run: |
           pip install -r requirements.txt
       - name: Create Readme
+        shell: bash
         run: |
           make README.md
+      - name: Remove Init Workflow
+        shell: bash
+        run: |
+          rm .github/workflows/init.yml
       - name: Git Commit/Push Changes
         uses: actions-x/commit@v1
