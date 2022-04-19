@@ -33,7 +33,7 @@ The first time this file is edited, the workflow defined in [init.yml](.github/w
 The workflow will …
   - … rename the current README.md to `admin.md`.
   - … create a new README.md based on the template in [README.template.md](README.template.md).
-  - … delete the init workflow (so that it doesn't get triggered each time the config file is changed).
+  - … disable the init workflow (so that it doesn't get triggered each time the config file is changed).
 - Finally, add collaborators to the new repository who will be adding the datafiles.
 Collaborators can be added in <a href="../../settings/access">Settings > Access</a>.
 Collaborators should have the **Write** role.

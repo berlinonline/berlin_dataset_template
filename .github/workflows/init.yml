@@ -34,9 +34,17 @@ jobs:
         shell: bash
         run: |
           make README.md
-      - name: Remove Init Workflow
+      - name: Commit and Push
+        shell: bash
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add README.md admin.md
+          git commit -m "initialise repository"
+          git push
+      - name: Disable this Workflow
         shell: bash
         run: |
-          rm .github/workflows/init.yml
-      - name: Git Commit/Push Changes
-        uses: actions-x/commit@v1
+          gh workflow disable -R $GITHUB_REPOSITORY "${{ github.workflow }}"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
