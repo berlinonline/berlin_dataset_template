@@ -2,7 +2,6 @@
 
 ![Berlin-Open-Data-Logo vor stilisierter Landkarte von Berlin](images/twitter_card_fallback_small.jpg)
 
-
 This repository can be used as a template for new datasets for [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin"), the official Open Data portal of the city of Berlin.
 While the data portal is exclusively a metadata portal, repositories created on the basis of this template are meant to hold the actual data of a dataset.
 
@@ -13,15 +12,15 @@ The template provides a number of elements that are common to all datasets, as w
 - metadata for the dataset in the [conf](conf) folder
 - a [Makefile](Makefile) to help automate certain administration tasks
 - [workflows](.github) that will trigger these tasks under certain conditions:
-  - initialising the new dataset repository when the metadata in [conf/updater.json](conf/updater.json) is first changed
+  - initialising the new dataset repository when the metadata in [conf/updater.json](conf/updater.json) is changed for the first time
   - updating the dataset's metadata in [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin") each time the [data](data) is changed
 
 ## Using the Template
 
 To create a new dataset repository from this template, follow the these steps:
 
-- Click the green  <a href="../../generate">**Use this template**</a> button right below the main navigation.
-- Enter the repository name and description. Make sure the repository is **public** and the  **Include all branches** check box is not ticked!
+- Click the green <a href="../../generate">**Use this template**</a> button right below the main navigation.
+- Enter the repository name and description. Make sure the repository is **public** and the **Include all branches** check box is not ticked!
 - Once the new repository is created, create a new repository secret called `CKAN_TOKEN` in <a href="../../settings/secrets/actions">Settings > Secrets > Actions</a>.
 This token is needed to communicate and write to the Datenregister (CKAN).
 The token can either be found on your user profile page, or it can be generated there.
