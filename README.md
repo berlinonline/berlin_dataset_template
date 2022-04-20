@@ -9,7 +9,7 @@ The template provides a number of elements that are common to all datasets, as w
 
 - a `README.md` file with basic information about the dataset
 - a [data](data) folder as the default location for the actual data files
-- metadata for the dataset in the [conf](conf) folder
+- metadata for the dataset and other configuration in the [conf](conf) folder
 - a [Makefile](Makefile) to help automate certain administration tasks
 - [workflows](.github) that will trigger these tasks under certain conditions:
   - initialising the new dataset repository when the metadata in [conf/updater.json](conf/updater.json) is changed for the first time
@@ -30,8 +30,9 @@ _Important: don't enter an admin-level token here, as this would introduce serio
 - To initialise the repository, you can <a href="../../edit/master/conf/ckan_updater.json">edit the configuration file</a> in `conf/ckan_updater.json`.
 The first time this file is edited, the workflow defined in [init.yml](.github/workflows/init.yml) will be triggered.
 The workflow will …
-  - … rename the current README.md to `admin.md`.
-  - … create a new README.md based on the template in [README.template.md](README.template.md).
+  - … rename the current README.md to `admin.md` (so that it isn't lost).
+  - … create a new README.md based on the template in [README.template.md](README.template.md) and the metadata in [conf/ckan_updater.json](conf/ckan_updater.json).
+  - … add the URL of the repository as the URL of the dataset in [conf/ckan_updater.json](conf/ckan_updater.json).
   - … disable the init workflow (so that it doesn't get triggered each time the config file is changed).
 - Finally, add collaborators to the new repository who will be adding the datafiles.
 Collaborators can be added in <a href="../../settings/access">Settings > Access</a>.
