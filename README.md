@@ -11,15 +11,15 @@ The template provides a number of elements that are common to all datasets, as w
 - a [data](data) folder as the default location for the actual data files
 - metadata for the dataset and other configuration in the [conf](conf) folder
 - a [Makefile](Makefile) to help automate certain administration tasks
-- [workflows](.github) that will trigger these tasks under certain conditions:
+- [workflows](.github/workflows/) that will trigger these tasks under certain conditions:
   - initialising the new dataset repository when the metadata in [conf/updater.json](conf/updater.json) is changed for the first time
   - updating the dataset's metadata in [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin") each time the [data](data) is changed
 
-## Using the Template
+## Creating a New Dataset Repository
 
-To create a new dataset repository from this template, follow the these steps:
+To create a new dataset repository from this template, do the following:
 
-- Click the green <a href="../../generate">**Use this template**</a> button right below the main navigation.
+- Click the green <a href="../../generate">Use this template</a> button right below the main navigation.
 - Enter the repository name and description. Make sure the repository is **public** and the **Include all branches** check box is not ticked!
 - Once the new repository is created, create a new repository secret called `CKAN_TOKEN` in <a href="../../settings/secrets/actions">Settings > Secrets > Actions</a>.
 This token is needed to communicate and write to the Datenregister (CKAN).
@@ -28,7 +28,10 @@ The token needs to belong to a user that has write access to the CKAN organizati
 Ideally the user that is responsible for the dataset.
 _Important: don't enter an admin-level token here, as this would introduce serious security risks!_
 - To initialise the repository, you can <a href="../../edit/master/conf/ckan_updater.json">edit the configuration file</a> in `conf/ckan_updater.json`.
-The first time this file is edited, the workflow defined in [init.yml](.github/workflows/init.yml) will be triggered.
+This works both if the dataset already exists in CKAN and if it doesn't.
+If it exists already, it's best to copy the relevant metadata from CKAN.
+All attributes that are present in [conf/ckan_updater.json](conf/ckan_updater.json) should be edited.
+The first time the file is edited, the workflow defined in [init.yml](.github/workflows/init.yml) will be triggered.
 The workflow will …
   - … rename the current README.md to `admin.md` (so that it isn't lost).
   - … create a new README.md based on the template in [README.template.md](README.template.md) and the metadata in [conf/ckan_updater.json](conf/ckan_updater.json).
