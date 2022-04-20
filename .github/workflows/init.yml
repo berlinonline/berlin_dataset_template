@@ -33,7 +33,7 @@ jobs:
       - name: Create Readme
         shell: bash
         run: |
-          make README.md
+          make init
       - name: Commit and Push
         shell: bash
         run: |-
