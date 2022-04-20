@@ -27,6 +27,13 @@ admin.md:
 	@echo "generating $@ ..."
 	@mv README.md $@
 
+.PHONY: conf/ckan_updater.json
+conf/ckan_updater.json: temp/repository.json
+	@echo "merging $@ with $< ..."
+	@jq -s '.[0] * .[1]' $@ $< > temp/_ckan_updater.json
+	@echo "copying merged file to $@ ..."
+	@mv temp/_ckan_updater.json $@
+
 # download the license definition file, make each license accessible 
 # by its id
 temp/licenses.json: temp
@@ -38,11 +45,17 @@ temp/license_details.json: temp/licenses.json
 	@echo "writing license details to $@ ..."
 	@jq --arg license_id "$(license_id)" '.[$$license_id] | { dataset: { license_title: .title, license_url: .url } }' $< > $@
 
-# merge config with license details into an updated config
-temp/ckan_updater.json: temp/license_details.json
-	@echo "merging $@ and $< ..."
-	@jq -s '.[0] * .[1]' $(config_location) $< > $@
+# create a json file with the URL of the github repository
+# GITHUB_REPOSITORY is a default environment variable available in GitHub Actions:
+# https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+temp/repository.json: temp
+	@echo "writing repository URL to $@ ..."
+	@jq -n --arg github_repository "https://github.com/$(GITHUB_REPOSITORY)" '{ dataset: { url: $$github_repository } }' > $@
 
+# merge config with license details into an updated config
+temp/ckan_updater.json: conf/ckan_updater.json temp/license_details.json
+	@echo "merging $^ ..."
+	@jq -s '.[0] * .[1]' $^ > $@
 
 # housekeeping
 clean: clean-temp
