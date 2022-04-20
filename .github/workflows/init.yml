@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           pip install -r requirements.txt
-      - name: Create Readme
+      - name: Run initialisation make target
         shell: bash
         run: |
           make init
