@@ -7,11 +7,9 @@ ckan_base = `jq -r '.connection.ckan_base' conf/ckan_updater.json`
 license_def = $(ckan_base)/licenses/berlin-od-portal.json
 config_location = conf/ckan_updater.json
 
-# rename the original README.md to admin.md to keep it in the new repository
-.PHONY: admin.md
-admin.md:
-	@echo "generating $@ ..."
-	@mv README.md $@
+# high-level targets
+.PHONY: init
+init: README.md
 
 # create the real new README
 README.md: temp/README.md admin.md
@@ -23,7 +21,13 @@ temp/README.md: temp/ckan_updater.json
 	@echo "generating $@ ..."
 	@j2 README.template.md $< > $@
 
-# download the license definition file, make each license accesible 
+# rename the original README.md to admin.md to keep it in the new repository
+.PHONY: admin.md
+admin.md:
+	@echo "generating $@ ..."
+	@mv README.md $@
+
+# download the license definition file, make each license accessible 
 # by its id
 temp/licenses.json: temp
 	@echo "getting license list from $(license_def) ..."
