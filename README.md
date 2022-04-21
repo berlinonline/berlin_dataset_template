@@ -25,7 +25,13 @@ The token can either be found on your user profile page, or it can be generated 
 The token needs to belong to a user that has write access to the CKAN organization that the dataset belongs to.
 Ideally the user that is responsible for the dataset.
 _Important: don't enter an admin-level token here, as this would introduce serious security risks!_
-- To initialise the repository, you can <a href="../../edit/master/conf/ckan_updater.json">edit the configuration file</a> in `conf/ckan_updater.json`.
+- Finally, add collaborators to the new repository who will be adding the datafiles.
+Collaborators can be added in <a href="../../settings/access">Settings > Access</a>.
+Collaborators should have the **Write** role.
+
+## Initialising the Dataset Repository
+
+To initialise the repository, you can <a href="../../edit/master/conf/ckan_updater.json">edit the configuration file</a> in `conf/ckan_updater.json`.
 This works both if the dataset already exists in CKAN and if it doesn't.
 If it exists already, it's best to copy the relevant metadata from CKAN.
 All attributes that are present in [conf/ckan_updater.json](conf/ckan_updater.json) should be edited.
@@ -35,10 +41,18 @@ The workflow will …
   - … create a new README.md based on the template in [README.template.md](README.template.md) and the metadata in [conf/ckan_updater.json](conf/ckan_updater.json).
   - … add the URL of the repository as the URL of the dataset in [conf/ckan_updater.json](conf/ckan_updater.json).
   - … disable the init workflow (so that it doesn't get triggered each time the config file is changed).
-- Finally, add collaborators to the new repository who will be adding the datafiles.
-Collaborators can be added in <a href="../../settings/access">Settings > Access</a>.
-Collaborators should have the **Write** role.
 
+## Updating the Data
+
+All collaborators with **write** access can change data in or add data to the repository.
+All data needs to reside in the [data](data) folder.
+Adding or changing data is possible directly from the browser by navigating to the `data` folder and then clicking <a href="../../upload/master/data">Add file > Upload files</a>.
+
+Any change to files in the `data` folder triggers the [dataset_update](.github/workflows/dataset_update.yml) workflow.
+The main thing this workflow does is run the [CKAN Metadata Updater](https://github.com/berlinonline/ckan_metadata_updater) tool to modify the dataset's metadata in the Datenregister/CKAN.
+Without further configuration, the updater will set `date_updated` to today's date and apply the `dataset` metadata patch in [conf/ckan_updater.json](conf/ckan_updater.json) (overwrite all common attributes with the values in the config file).
+If you need additional changes when the dataset's data is updated, you can [add additional custom steps](https://github.com/berlinonline/ckan_metadata_updater#custom-steps) to the updater.
+This requires adding Python code to the repository and potentially adjusting the [Makefile](Makefile).
 
 ## License
 
