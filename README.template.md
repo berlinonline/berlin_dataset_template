@@ -7,7 +7,7 @@
 ---
 
 Dieser Datensatz ist Teil von [Berlin Open Data](https://daten.berlin.de), dem zentralen Portal für offene Daten des Landes Berlin.
-Der Datensatz ist dort unter https://daten.berlin.de/datensaetze/{{ dataset.name_or_id }} eingetragen.
+Der Datensatz ist dort unter https://daten.berlin.de/datensaetze/{{ dataset.id }} eingetragen.
 
 ## Lizenz
 
