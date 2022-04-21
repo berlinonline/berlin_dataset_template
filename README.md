@@ -1,7 +1,5 @@
 # Berlin Dataset Template
 
-![Berlin-Open-Data-Logo vor stilisierter Landkarte von Berlin](images/twitter_card_fallback_small.jpg)
-
 This repository can be used as a template for new datasets for [Berlin Open Data](https://daten.berlin.de "The official Open Data portal of Berlin"), the official Open Data portal of the city of Berlin.
 While the data portal is exclusively a metadata portal, repositories created on the basis of this template are meant to hold the actual data of a dataset.
 
