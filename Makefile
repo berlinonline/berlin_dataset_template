@@ -8,8 +8,11 @@ license_def = $(ckan_base)/licenses/berlin-od-portal.json
 config_location = conf/ckan_updater.json
 
 # high-level targets
-.PHONY: init
-init: README.md
+.PHONY: repository-init
+repository-init: README.md
+
+dataset-update:
+	@metadata_updater
 
 # create the real new README
 README.md: temp/README.md admin.md

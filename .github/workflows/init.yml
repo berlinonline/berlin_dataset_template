@@ -33,7 +33,7 @@ jobs:
       - name: Run initialisation make target
         shell: bash
         run: |
-          make init
+          make repository-init
       - name: Commit and Push
         shell: bash
         run: |-
