@@ -1,8 +1,5 @@
 # This workflow is used to initialize a new repository when it is created
 # from this template rempository.
-# If is trigger when a new branch is created, but the job is only executed 
-# when that branch is 'refs/head/master'.
-# Idea from https://lgulliver.github.io/dynamically-generate-projects-with-github-templates-and-actions/
 name: Init Dataset Project
 on:
   push:
@@ -23,8 +20,10 @@ jobs:
         # is a template repository or not.
         # see https://github.com/stefanbuck/cookiecutter-template/blob/main/.github/workflows/setup-repository.yml
         run: |
-          curl https://api.github.com/repos/$GITHUB_REPOSITORY \
+          gh api repos/$GITHUB_REPOSITORY \
             | jq --exit-status '.is_template == false'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - uses: actions/checkout@v2
       - name: Install Requirements
         shell: bash
